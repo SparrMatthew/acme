@@ -1,0 +1,91 @@
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+    <!-- Existing columns -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let record">
+        {{ record.firstName }}&nbsp;{{ record.lastName }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Address</th>
+      <td mat-cell *matCellDef="let record">{{ record.address }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+      <td mat-cell *matCellDef="let record">{{ record.city }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="state">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>State</th>
+      <td mat-cell *matCellDef="let record">{{ record.state }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="zip">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Zip</th>
+      <td mat-cell *matCellDef="let record">{{ record.zip }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Phone</th>
+      <td mat-cell *matCellDef="let record">{{ record.phone }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="icons">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+      <td mat-cell *matCellDef="let record">
+        <button style="z-index: 100;"
+          mat-icon-button
+          (click)="showDetail(record)"
+          title="view record"
+        >
+          <mat-icon>preview</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Expanded Content Column -->
+    <ng-container matColumnDef="expandedDetail">
+      <td
+        mat-cell
+        *matCellDef="let record"
+        [attr.colspan]="displayedColumns.length"
+      >
+        <div
+          class="example-element-detail"
+          [@detailExpand]="record === expandedElement ? 'expanded' : 'collapsed'"
+        >
+          <!-- Place your expanded content here -->
+          <div class="example-element-description">
+            <p style="text-align: center; color: red">
+              Total Annual Salary:
+              {{ totalAnnualSalary(record.salary) | currency }}
+            </p>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let record; columns: displayedColumns"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === record"
+      (click)="expandedElement = expandedElement === record ? null : record"
+    ></tr>
+    <tr
+      mat-row
+      *matRowDef="let record; columns: ['expandedDetail']"
+      class="example-detail-row"
+    ></tr>
+  </table>
+
+  <mat-paginator
+    [pageSizeOptions]="[5, 10, 20]"
+    showFirstLastButtons
+  ></mat-paginator>
+</div>

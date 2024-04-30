@@ -1,0 +1,10 @@
+
+> @acme/source@0.0.0 npx
+> nx g nx:connect-to-nx-cloud --no-interactive --quiet
+
+
+ NX   unable to get local issuer certificate
+
+Pass --verbose to see the stacktrace.
+
+
