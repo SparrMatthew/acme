@@ -1,0 +1,16 @@
+.toolbar {
+  min-width: 100%;
+  z-index: 5;
+}
+
+.action-button {
+  position: relative;
+  margin: 0 0 0 auto;
+  background-color: lime;
+  z-index: 10;
+}
+
+.mat-menu-item {
+    line-height: 2em;
+    height: 2em;
+  }

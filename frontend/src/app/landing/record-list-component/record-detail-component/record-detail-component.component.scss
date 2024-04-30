@@ -1,3 +1,9 @@
+mat-progress-spinner {
+  margin: 25% auto; 
+}
+.mat-progress-spinner circle {
+  stroke: lightblue !important;
+}
 /* Address Block Component Styles */
 .address-card {
   max-width: 400px;

@@ -1,21 +1,22 @@
 .table {
-  padding: 1em;
 
   .mat-mdc-table {
-    min-width: 90%;
-    margin: 10% auto 0;
+    min-width: 100%;
+    margin: 1em auto 1em;
+    z-index: 15;
   }
 
   /* Header styles */
   .mat-mdc-header-cell {
     background-color: #673ab7 !important; /* Purple */
     color: #fff;
-    font-weight: bold !important;
   }
 
   /* Row styles */
   .mat-mdc-row {
     border-bottom: 1px solid #673ab7 !important; /* Purple */
+    font-size: 1.25em;
+
   }
 
   /* Cell styles */
@@ -26,6 +27,7 @@
   /* Button styles */
   button {
     background-color: purple;
+    z-index: 10;
     mat-icon {
       color: pink;
     }
@@ -40,14 +42,15 @@
   .example-element-description {
     background-color: #009688; /* Teal */
     color: #fff;
-    padding: 10px;
-    font-size: 16px;
+    font-size: 1em;
+    padding: .25em;
+    margin-left: 2em;
   }
 
   /* Paginator styles */
   .mat-mdc-paginator {
-    min-width: 90%;
-    width: 90%;
+    min-width: 100%;
+    width: 100%;
     margin: 0 auto;
     background-color: #673ab7; /* Purple */
     color: #fff;

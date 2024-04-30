@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Company } from '../../models/company';
 import { Record } from '../../models/record';
 import { RecordService } from '../record.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-record-detail-component',
@@ -17,8 +18,11 @@ export class RecordDetailComponent implements OnInit {
   userID: (() => string) | undefined;
   selectedUserId!: string;
 
-  constructor(recordService: RecordService) {
+  constructor(recordService: RecordService, private router: Router) {
     this.selectedUserId = recordService.getSelectedUID();
+    if (this.selectedUserId === "0000000"){
+      this.router.navigate(['/records']);
+    }
     
     recordService.getRecordByUID(this.selectedUserId).subscribe((user) => {
       this.user = user;

@@ -22,38 +22,42 @@ import { RecordService } from './record.service';
 })
 export class RecordListComponent implements OnInit, AfterContentInit {
   displayedColumns: string[] = ['name', 'address', 'city', 'state', 'zip', 'phone', 'icons'];
- 
+
 
   @ViewChild(MatSort, { static: true })
   sort!: MatSort;
   @ViewChild(MatPaginator, { static: true })
   paginator!: MatPaginator;
-  expandedElement = 'collapsed';
+  expandedElement?: Record | null;
   rowExpanded = false;
   dataSource!: MatTableDataSource<Record, MatPaginator>;
 
   ngAfterContentInit(): void {
-    if(this.dataSource) {
+    if (this.dataSource) {
       this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;  
+      this.dataSource.paginator = this.paginator;
     }
   }
 
   constructor(
     private router: Router,
     private recordService: RecordService
-  
+
   ) { }
-  
+
   ngOnInit() {
-    this.recordService.getAllRecords().subscribe((records)=>{
+    this.recordService.getAllRecords().subscribe((records) => {
       this.dataSource = new MatTableDataSource<Record>(records);
     });
-    
+    this.expandedElement = null;
     this.rowExpanded = false;
   }
 
-  showDetail(record: Record): void {
+  expandRow(record: Record): void {
+    this.expandedElement = this.expandedElement === record ? null : record;
+  }
+
+  showDetailView(record: Record): void {
     this.recordService.setSelectedUID(record.UID);
     this.router.navigate(['record-detail', record.UID])
   }

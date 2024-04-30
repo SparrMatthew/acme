@@ -14,15 +14,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-
-
+import { MastheadModule } from './masthead/masthead.module';
 
 @NgModule({
   declarations: [AppComponent, LandingComponent, RecordListComponent, RecordDetailComponent],
   imports: [BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, MatInputModule,
-    MatFormFieldModule, MatCardModule, FormsModule],
+    MatFormFieldModule, MatCardModule, MatProgressSpinnerModule, FormsModule, MastheadModule],
   providers: [
     provideAnimationsAsync()
   ],
