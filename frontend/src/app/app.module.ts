@@ -17,6 +17,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 
+
+
 @NgModule({
   declarations: [AppComponent, LandingComponent, RecordListComponent, RecordDetailComponent],
   imports: [BrowserModule, RouterModule.forRoot(appRoutes), HttpClientModule, MatTableModule, MatSortModule, MatPaginatorModule, MatIconModule, MatInputModule,

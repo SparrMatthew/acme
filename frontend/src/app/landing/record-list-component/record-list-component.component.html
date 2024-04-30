@@ -1,5 +1,5 @@
-<div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+<div class="table">
+  <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows class="mat-elevation-z8">
     <!-- Existing columns -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
@@ -41,7 +41,7 @@
           (click)="showDetail(record)"
           title="view record"
         >
-          <mat-icon>preview</mat-icon>
+          <mat-icon>person</mat-icon>
         </button>
       </td>
     </ng-container>
@@ -59,7 +59,7 @@
         >
           <!-- Place your expanded content here -->
           <div class="example-element-description">
-            <p style="text-align: center; color: red">
+            <p>
               Total Annual Salary:
               {{ totalAnnualSalary(record.salary) | currency }}
             </p>
