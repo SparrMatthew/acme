@@ -1,4 +1,22 @@
 <div class="table">
+  <mat-form-field appearance="outline" style="margin-top: 1em;">
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Type to search..."
+      [(ngModel)]="filterValue"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      *ngIf="filterValue"
+      (click)="clearFilter()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
   <table
     mat-table
     [dataSource]="dataSource"
@@ -78,7 +96,8 @@
 
     <!-- Rows -->
     <tr
-      mat-row style="z-index: 100;"
+      mat-row
+      style="z-index: 100"
       *matRowDef="let record; columns: displayedColumns"
       (click)="expandRow(record)"
     ></tr>
@@ -89,8 +108,11 @@
     ></tr>
   </table>
 
-  <mat-paginator class="mat-elevation-z8"
-    [pageSizeOptions]="[5, 10, 20]"
+  <mat-paginator
+    class="mat-elevation-z8"
+    [length]="totalRecords"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
     showFirstLastButtons
   ></mat-paginator>
 </div>

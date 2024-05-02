@@ -31,6 +31,8 @@ export class RecordListComponent implements OnInit, AfterContentInit {
   expandedElement?: Record | null;
   rowExpanded = false;
   dataSource!: MatTableDataSource<Record, MatPaginator>;
+  totalRecords = 0;
+  filterValue = '';
 
   ngAfterContentInit(): void {
     if (this.dataSource) {
@@ -47,12 +49,31 @@ export class RecordListComponent implements OnInit, AfterContentInit {
 
   ngOnInit() {
     this.recordService.getAllRecords().subscribe((records) => {
+      this.totalRecords = records.length;
       this.dataSource = new MatTableDataSource<Record>(records);
+      this.dataSource.filterPredicate = (data: Record, filter: string) => {
+        // Implement custom filtering logic
+        // Return true if data matches the filter
+
+        return data.phone.toLowerCase().includes(filter);
+      };
     });
+    
     this.expandedElement = null;
     this.rowExpanded = false;
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    if (filterValue.length >= 3 || filterValue === '') {
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
+  }
+
+  clearFilter() {
+    this.filterValue = '';
+    this.dataSource.filter = '';
+  }
   expandRow(record: Record): void {
     this.expandedElement = this.expandedElement === record ? null : record;
   }

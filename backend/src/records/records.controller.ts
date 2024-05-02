@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { RecordsService } from './records.service';
 import { Record } from './entities/record.entity';
 
@@ -20,4 +20,11 @@ export class RecordsController {
   getTotalIncome(@Param('UID') UID: string): number {
     return this.recordService.calculateTotalIncome(UID);
   }
+
+  // @Get('generate')
+  // generateMultipleRecords(@Query('count') count: number) {
+  //   // Convert count to a number and provide a default if necessary
+  //   const recordCount = Number(count) || 10; // Default to 10 if count is not provided
+  //   return this.recordService.generateMultipleRecords(recordCount);
+  // }
 }
