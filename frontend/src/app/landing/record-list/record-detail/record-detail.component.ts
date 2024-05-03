@@ -5,12 +5,12 @@ import { RecordService } from '../record.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-record-detail-component',
-  templateUrl: './record-detail-component.component.html',
-  styleUrl: './record-detail-component.component.scss'
+  selector: 'app-record-detail',
+  templateUrl: './record-detail.component.html',
+  styleUrl: './record-detail.component.scss'
 })
 export class RecordDetailComponent implements OnInit {
-  user!: Record;
+  user?: Record | null;
   totalAnnualSalary = 0;
   salaryDisplayedColumns!: string[];
   salaryArray!: Company[];
@@ -36,7 +36,7 @@ export class RecordDetailComponent implements OnInit {
 
   public getTotalSalary(): number {
     this.totalAnnualSalary = 0;
-    this.user.salary.forEach((company: Company) => {
+    this.user?.salary.forEach((company: Company) => {
       this.totalAnnualSalary += company.annualSalary;
     });
 

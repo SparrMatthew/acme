@@ -5,4 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './masthead.component.html',
   styleUrl: './masthead.component.scss',
 })
+
 export class MastheadComponent {}

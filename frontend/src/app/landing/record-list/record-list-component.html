@@ -1,5 +1,5 @@
 <div class="table">
-  <mat-form-field appearance="outline" style="margin-top: 1em;">
+  <mat-form-field appearance="outline">
     <mat-label>Filter</mat-label>
     <input
       matInput
@@ -10,7 +10,6 @@
     <button
       mat-icon-button
       matSuffix
-      *ngIf="filterValue"
       (click)="clearFilter()"
     >
       <mat-icon>close</mat-icon>

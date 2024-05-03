@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterContentInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -9,9 +9,9 @@ import { Company } from '../models/company';
 import { RecordService } from './record.service';
 
 @Component({
-  selector: 'app-record-list-component',
-  templateUrl: './record-list-component.component.html',
-  styleUrl: './record-list-component.component.scss',
+  selector: 'app-record-list',
+  templateUrl: './record-list-component.html',
+  styleUrl: './record-list-component.scss',
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
@@ -21,9 +21,6 @@ import { RecordService } from './record.service';
   ]
 })
 export class RecordListComponent implements OnInit, AfterContentInit {
-  displayedColumns: string[] = ['name', 'address', 'city', 'state', 'zip', 'phone', 'icons'];
-
-
   @ViewChild(MatSort, { static: true })
   sort!: MatSort;
   @ViewChild(MatPaginator, { static: true })
@@ -32,7 +29,9 @@ export class RecordListComponent implements OnInit, AfterContentInit {
   rowExpanded = false;
   dataSource!: MatTableDataSource<Record, MatPaginator>;
   totalRecords = 0;
-  filterValue = '';
+  filterValue= '';
+  displayedColumns: string[] = ['name', 'address', 'city', 'state', 'zip', 'phone', 'icons'];
+
 
   ngAfterContentInit(): void {
     if (this.dataSource) {

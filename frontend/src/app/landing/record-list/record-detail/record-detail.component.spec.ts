@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LandingComponent } from './landing.component';
+import { RecordDetailComponent } from './record-detail.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MaterialModule } from '../../../material.module';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from 'frontend/src/app/app.routes';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { RouterModule } from '@angular/router';
-import { AppComponent } from '../app.component';
-import { appRoutes } from '../app.routes';
-import { MastheadModule } from '../masthead/masthead.module';
-import { MaterialModule } from '../material.module';
-import { RecordDetailComponent } from './record-list/record-detail/record-detail.component';
-import { RecordListComponent } from './record-list/record-list-component';
+import { AppComponent } from 'frontend/src/app/app.component';
+import { MastheadModule } from 'frontend/src/app/masthead/masthead.module';
+import { LandingComponent } from '../../landing.component';
+import { RecordListComponent } from '../record-list-component';
 
-describe('LandingComponent', () => {
-  let component: LandingComponent;
-  let fixture: ComponentFixture<LandingComponent>;
+describe('RecordDetailComponent', () => {
+  let component: RecordDetailComponent;
+  let fixture: ComponentFixture<RecordDetailComponent>;
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
@@ -25,7 +25,7 @@ describe('LandingComponent', () => {
       ],
     }).compileComponents();
     
-    fixture = TestBed.createComponent(LandingComponent);
+    fixture = TestBed.createComponent(RecordDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -34,3 +34,4 @@ describe('LandingComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

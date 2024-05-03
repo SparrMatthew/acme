@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MastheadComponent } from './masthead.component';
+import { MaterialModule } from '../material.module';
 
 describe('MastheadComponent', () => {
   let component: MastheadComponent;
@@ -7,6 +8,7 @@ describe('MastheadComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [MaterialModule],
       declarations: [MastheadComponent],
     }).compileComponents();
 
