@@ -3,12 +3,12 @@ import { RecordDetailComponent } from './record-detail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from '../../../material.module';
 import { RouterModule } from '@angular/router';
-import { appRoutes } from 'frontend/src/app/app.routes';
+import { appRoutes } from '../../../app.routes';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { AppComponent } from 'frontend/src/app/app.component';
-import { MastheadModule } from 'frontend/src/app/masthead/masthead.module';
+import { AppComponent } from '../../../app.component';
+import { MastheadModule } from '../../../masthead/masthead.module';
 import { LandingComponent } from '../../landing.component';
 import { RecordListComponent } from '../record-list-component';
 
