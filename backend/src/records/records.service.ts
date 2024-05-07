@@ -2,122 +2,58 @@ import { Injectable } from '@nestjs/common';
 import { CreateRecordDto } from './dto/create-record.dto';
 import { UpdateRecordDto } from './dto/update-record.dto';
 import { Record } from './entities/record.entity';
-// import { faker } from '@faker-js/faker/';
+import { faker } from '@faker-js/faker';
 import { Company } from './entities/company.entity';
 
 @Injectable()
 export class RecordsService {
-    private mockDatabase: Record[] = [
+  private mockDatabase: CreateRecordDto[] = this.generateMultipleRecords(100);
 
-      {
-        "UID": "123456789",
-        "firstName": "John",
-        "lastName": "Doe",
-        "address": "123 Elm St",
-        "city": "Springfield",
-        "state": "IL",
-        "zip": "62704",
-        "areaCode": "303",
-        "phone": "555-1234",
-        "salary": [
-          { "companyName": "ABC Corp", "annualSalary": 30000 },
-          { "companyName": "XYZ Inc", "annualSalary": 20000 }
-        ],
-        "totalHouseholdIncome": 60000
-      },
-      {
-        "UID": "987654321",
-        "firstName": "Jane",
-        "lastName": "Smith",
-        "address": "456 Oak St",
-        "city": "Shelbyville",
-        "state": "IN",
-        "zip": "46176",
-        "areaCode": "303",
-        "phone": "555-5678",
-        "salary": [
-          { "companyName": "123 Solutions", "annualSalary": 35000 },
-          { "companyName": "456 Enterprises", "annualSalary": 17000 }
-        ],
-        "totalHouseholdIncome": 62000
-      },
-      {
-        "UID": "234567891",
-        "firstName": "Alice",
-        "lastName": "Johnson",
-        "address": "789 Pine St",
-        "city": "Rivertown",
-        "state": "TX",
-        "zip": "73301",
-        "areaCode": "303",
-        "phone": "555-2345",
-        "salary": [
-          { "companyName": "789 Industries", "annualSalary": 40000 },
-          { "companyName": "101 Tech", "annualSalary": 25000 }
-        ],
-        "totalHouseholdIncome": 70000
-      },
-      {
-        "UID": "345678912",
-        "firstName": "Bob",
-        "lastName": "Brown",
-        "address": "321 Maple St",
-        "city": "Laketown",
-        "state": "WI",
-        "zip": "53202",
-        "areaCode": "303",
-        "phone": "555-3456",
-        "salary": [
-          { "companyName": "201 Innovations", "annualSalary": 45000 },
-          { "companyName": "303 Solutions", "annualSalary": 15000 }
-        ],
-        "totalHouseholdIncome": 65000
-      }
-    ];    
-
-    getRecordByUID(UID: string): Record {
-      // Mock database fetch
-      return this.mockDatabase.find(record => record.UID === UID);
-    }
-  
-    getAllRecords(): Record[] {
-      // Mock database fetch
-      return this.mockDatabase;
-    }
-  
-    calculateTotalIncome(UID: string): number {
-      const record = this.getRecordByUID(UID);
-      if (record) {
-        return record.salary.reduce((acc, companySalary) => acc + companySalary.annualSalary, 0);
-      }
-      return 0;
-    }
-
-    // generateCompany(): Company {
-    //   return {
-    //     companyName: faker.company.name(),
-    //     annualSalary: faker.datatype.number({ min: 30000, max: 500000 }),
-    //   };
-    // }
-  
-    // generateRecord(): Record {
-    //   return {
-    //     UID: faker.number.int({min: 9, max: 9}).toString(),
-    //     firstName: faker.person.firstName(),
-    //     lastName: faker.person.lastName(),
-    //     address: faker.location.streetAddress(),
-    //     city: faker.location.city(),
-    //     state: faker.location.state(),
-    //     zip: faker.location.zipCode(),
-    //     phone: faker.phone.number(),
-    //     areaCode: '303',
-    //     salary: Array.from({ length: faker.number.int({ min: 1, max: 3 }) }, () => this.generateCompany()),
-    //     totalHouseholdIncome: faker.number.int({ min: 50000, max: 50000000 }),
-    //   };
-    // }
-  
-    // generateMultipleRecords(count: number): Record[] {
-    //   return Array.from({ length: count }, () => this.generateRecord());
-    // }
+  getRecordByUID(UID: string): Record {
+    // Mock database fetch
+    return this.mockDatabase.find(record => record.UID === UID);
   }
-  
+
+  getAllRecords(): Record[] {
+    // Mock database fetch
+    return this.mockDatabase;
+  }
+
+  calculateTotalIncome(UID: string): number {
+    const record = this.getRecordByUID(UID);
+    if (record) {
+      return record.salary.reduce((acc, companySalary) => acc + companySalary.annualSalary, 0);
+    }
+    return 0;
+  }
+
+  generateCompany(): Company {
+    return {
+      companyName: faker.company.name(),
+      annualSalary: faker.number.int({ min: 30000, max: 500000 }),
+    };
+  }
+
+  generateRecord(): Record {
+    return {
+      UID: faker.number.int({ min: 100000000, max: 999999999 }).toString(),
+      firstName: faker.person.firstName(),
+      lastName: faker.person.lastName(),
+      address: faker.location.streetAddress(),
+      city: faker.location.city(),
+      state: faker.location.state(),
+      zip: faker.location.zipCode(),
+      phone: faker.phone.number(),
+      areaCode: '303',
+      salary: Array.from({ length: faker.number.int({ min: 1, max: 5 }) }, () => this.generateCompany()),
+      totalHouseholdIncome: faker.number.int({ min: 50000, max: 50000000 }),
+    };
+  }
+
+  generateMultipleRecords(count: number): Record[] {
+    this.mockDatabase = Array.from({ length: count }, () => this.generateRecord());
+
+    debugger
+    return this.mockDatabase;
+  }
+}

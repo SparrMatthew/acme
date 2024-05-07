@@ -4,12 +4,8 @@ import { Record } from './entities/record.entity';
 
 @Controller('records')
 export class RecordsController {
-  constructor(private readonly recordService: RecordsService) {}
-
-  @Get(':UID')
-  getRecord(@Param('UID') UID: string): Record {
-    return this.recordService.getRecordByUID(UID);
-  }
+  recordGenerationTime: number;
+  constructor(private readonly recordService: RecordsService) { }
 
   @Get()
   getAllRecords(): Record[] {
@@ -21,10 +17,52 @@ export class RecordsController {
     return this.recordService.calculateTotalIncome(UID);
   }
 
-  // @Get('generate')
-  // generateMultipleRecords(@Query('count') count: number) {
-  //   // Convert count to a number and provide a default if necessary
-  //   const recordCount = Number(count) || 10; // Default to 10 if count is not provided
-  //   return this.recordService.generateMultipleRecords(recordCount);
-  // }
+  /** 
+   * 1 record generated in:
+   * recordGenerationTime: 2.746ms
+   * http://localhost:3000/api/records/generate?count=100
+   * 100 records generated in:
+   * recordGenerationTime: 10.269ms
+   * 10000 records generated in:
+   * recordGenerationTime: 290.772ms
+   * http://localhost:3000/api/records/generate?count=1000000
+   * 1000000 records generated in:
+   * recordGenerationTime: 23.970s
+  
+  */
+  @Get('generate')
+  generateMultipleRecords(@Query('count') count: number): Record[] {
+    // Convert count to a number and provide a default if necessary
+    const recordCount = Number(count) || 10; // Default to 10 if count is not provided
+    this.recordGenerationTime = undefined;
+  
+    const startTime = performance.now();
+
+    // Generate the records
+    const records: Record[] = this.recordService.generateMultipleRecords(recordCount);
+    
+    // End the timer
+    const endTime = performance.now();
+    
+    // Calculate the elapsed time
+    debugger
+    this.recordGenerationTime = endTime - startTime;
+    
+    // Log the number of records generated and the elapsed time
+    console.log(recordCount + ' records generated in: ' + this.recordGenerationTime + ' ms');
+
+    return records;
+  }
+
+  @Get('time')
+  getCreationTime(): any {
+    console.log('Record gerneation time')
+    console.log('record generation time' + this.recordGenerationTime);
+    return this.recordGenerationTime;
+  }
+
+  @Get(':UID')
+  getRecord(@Param('UID') UID: string): Record {
+    return this.recordService.getRecordByUID(UID);
+  }
 }

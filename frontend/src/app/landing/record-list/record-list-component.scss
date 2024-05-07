@@ -1,5 +1,12 @@
-.table {
+.filter {
+  margin-top: 1em;
+}
 
+.clear-button {
+  margin-right: 0.25em;
+}
+
+.table {
   .mat-mdc-table {
     min-width: 100%;
     margin: 1em auto 1em;
@@ -9,14 +16,13 @@
   /* Header styles */
   .mat-mdc-header-cell {
     background-color: #673ab7 !important; /* Purple */
-    color: #fff;
+    color: black;
   }
 
   /* Row styles */
   .mat-mdc-row {
     border-bottom: 1px solid #673ab7 !important; /* Purple */
     font-size: 1.25em;
-
   }
 
   /* Cell styles */
@@ -26,10 +32,10 @@
 
   /* Button styles */
   button {
-    background-color: purple;
+    background-color: plum;
     z-index: 10;
     mat-icon {
-      color: pink;
+      color: darkred;
     }
   }
 
@@ -43,8 +49,9 @@
     background-color: #009688; /* Teal */
     color: #fff;
     font-size: 1em;
-    padding: .25em;
-    margin-left: 2em;
+    padding: 0.25em;
+    margin: 0.25em;
+    border-radius: .5em;
   }
 
   /* Paginator styles */
@@ -81,4 +88,23 @@
   .mat-mdc-paginator-navigation-previous.mat-icon-button.mat-accent {
     background-color: #009688; /* Teal */
   }
+}
+
+.generate {
+  margin: -3em 0 2em 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 25%;
+
+  .mat-button {
+    color: yellow;
+  }
+}
+
+mat-progress-spinner {
+  margin: 25% auto;
+}
+.mat-progress-spinner circle {
+  stroke: lightblue !important;
 }

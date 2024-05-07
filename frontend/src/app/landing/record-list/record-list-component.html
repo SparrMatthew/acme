@@ -1,5 +1,12 @@
+<mat-progress-spinner
+  *ngIf="!dataSource || dataSource.data.length < 1"
+  mode="indeterminate"
+  [diameter]="100"
+  [style.color]="'lightblue'"
+></mat-progress-spinner>
+
 <div class="table">
-  <mat-form-field appearance="outline">
+  <mat-form-field appearance="outline" class="filter ">
     <mat-label>Filter</mat-label>
     <input
       matInput
@@ -7,11 +14,7 @@
       placeholder="Type to search..."
       [(ngModel)]="filterValue"
     />
-    <button
-      mat-icon-button
-      matSuffix
-      (click)="clearFilter()"
-    >
+    <button class="clear-button" mat-icon-button matSuffix (click)="clearFilter()">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
@@ -24,6 +27,11 @@
     class="mat-elevation-z8"
   >
     <!-- Existing columns -->
+    <ng-container matColumnDef="userID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>User ID</th>
+      <td mat-cell *matCellDef="let record">{{ record.UID }}</td>
+    </ng-container>
+
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
       <td mat-cell *matCellDef="let record">
@@ -85,8 +93,8 @@
           <!-- Place your expanded content here -->
           <div class="example-element-description">
             <p>
-              Total Annual Salary:
-              {{ totalAnnualSalary(record.salary) | currency }}
+              Total Annual Salary: {{ totalAnnualSalary(record.salary) |
+              currency }}
             </p>
           </div>
         </div>
@@ -110,8 +118,17 @@
   <mat-paginator
     class="mat-elevation-z8"
     [length]="totalRecords"
-    [pageSize]="10"
+    [pageSize]="5"
     [pageSizeOptions]="[5, 10, 25, 100]"
     showFirstLastButtons
   ></mat-paginator>
+  <div class="generate">
+    <button mat-button (click)="generate(10000)">10K</button>
+    <button mat-button (click)="generate(100000)">100K</button>
+    <button mat-button (click)="generate(1000000)">1M</button>
+  </div>
+  <div *ngIf="time">
+    Mock record set of {{ dataSource.data.length }} records created in {{
+    time.getSeconds() }} seconds.
+  </div>
 </div>

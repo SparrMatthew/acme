@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -20,7 +20,7 @@ import { RecordService } from './record.service';
     ]),
   ]
 })
-export class RecordListComponent implements OnInit, AfterContentInit {
+export class RecordListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true })
   sort!: MatSort;
   @ViewChild(MatPaginator, { static: true })
@@ -29,16 +29,9 @@ export class RecordListComponent implements OnInit, AfterContentInit {
   rowExpanded = false;
   dataSource!: MatTableDataSource<Record, MatPaginator>;
   totalRecords = 0;
-  filterValue= '';
-  displayedColumns: string[] = ['name', 'address', 'city', 'state', 'zip', 'phone', 'icons'];
-
-
-  ngAfterContentInit(): void {
-    if (this.dataSource) {
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    }
-  }
+  filterValue = '';
+  displayedColumns: string[] = ['userID','name', 'address', 'city', 'state', 'zip', 'phone', 'icons'];
+  time?: Date;
 
   constructor(
     private router: Router,
@@ -46,25 +39,41 @@ export class RecordListComponent implements OnInit, AfterContentInit {
 
   ) { }
 
+  ngAfterViewInit(): void {
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+
   ngOnInit() {
-    this.recordService.getAllRecords().subscribe((records) => {
+    const count = 50;
+    this.recordService.generateNewRecordSet(count).subscribe((records: Record[]) => {
       this.totalRecords = records.length;
       this.dataSource = new MatTableDataSource<Record>(records);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
       this.dataSource.filterPredicate = (data: Record, filter: string) => {
-        // Implement custom filtering logic
         // Return true if data matches the filter
 
-        return data.phone.toLowerCase().includes(filter);
+        return data.UID.includes(filter);
       };
     });
-    
+
+    this.recordService.getCreationTime().subscribe((time: number) => {
+      if (time) {
+        this.time = new Date(time);
+      }
+    });
+
+
     this.expandedElement = null;
     this.rowExpanded = false;
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    if (filterValue.length >= 3 || filterValue === '') {
+    if (filterValue.length >= 2 || filterValue === '') {
       this.dataSource.filter = filterValue.trim().toLowerCase();
     }
   }
@@ -77,13 +86,36 @@ export class RecordListComponent implements OnInit, AfterContentInit {
     this.expandedElement = this.expandedElement === record ? null : record;
   }
 
+  generate(count: number): void {
+    this.dataSource.data = [];
+    this.time = undefined;
+    this.recordService.generateNewRecordSet(count).subscribe((dataset) => {
+      if (dataset) {
+        this.dataSource = new MatTableDataSource<Record>(dataset);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.filterPredicate = (data: Record, filter: string) => {
+          // Implement custom filtering logic
+          // Return true if data matches the filter
+  
+          return data.phone.toLowerCase().includes(filter);
+        };
+
+        this.recordService.getCreationTime().subscribe((time: number) => {
+          if (time) {
+            this.time = new Date(time);
+          }
+        });
+      }
+    });
+  }
+
   showDetailView(record: Record): void {
     this.recordService.setSelectedUID(record.UID);
     this.router.navigate(['record-detail', record.UID])
   }
 
   totalAnnualSalary(salary: Array<Company>): number {
-    console.log('hit')
     let total = 0;
 
     salary.forEach((company) => {

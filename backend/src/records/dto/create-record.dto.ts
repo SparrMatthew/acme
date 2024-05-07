@@ -1,1 +1,16 @@
-export class CreateRecordDto {}
+import { Company } from "../entities/company.entity";
+
+export class CreateRecordDto {
+    UID: string;
+    name?: string;
+    firstName: string;
+    lastName: string;
+    address: string;
+    city: string;
+    state: string;
+    zip: string;
+    areaCode: string;
+    phone: string;
+    salary: Company[];
+    totalHouseholdIncome: number;
+}

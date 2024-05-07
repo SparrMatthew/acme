@@ -39,7 +39,7 @@
           <!-- Total Annual Salary Footer -->
           <ng-container matColumnDef="totalSalary">
             <!-- <td mat-footer-cell *matFooterCellDef colspan="2"> Total Annual Salary: </td> -->
-            <td mat-footer-cell *matFooterCellDef> {{ getTotalSalary() | currency }} </td>
+            <td mat-footer-cell *matFooterCellDef> <p>Total Annual Income: {{ getTotalSalary() | currency }}</p> </td>
           </ng-container>
     
           <tr mat-header-row *matHeaderRowDef="salaryDisplayedColumns"></tr>
