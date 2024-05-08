@@ -84,7 +84,7 @@ export class RecordListComponent implements OnInit {
   }
 
   generate(count: number): void {
-    this.dataSource.data = [];
+    this.dataSource = new MatTableDataSource<Record>();
     this.time = undefined;
     this.recordService.generateNewRecordSet(count).subscribe((dataset) => {
       if (dataset) {

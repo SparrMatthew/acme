@@ -25,6 +25,10 @@
     font-size: 1.25em;
   }
 
+  .normal-row {
+    z-index: 100;
+  }
+
   /* Cell styles */
   .mat-mdc-cell {
     color: #333 !important;
@@ -108,4 +112,13 @@ mat-progress-spinner {
 }
 .mat-progress-spinner circle {
   stroke: lightblue !important;
+}
+.no-data-row {
+display: flex;
+flex-direction: column;
+justify-content: center;  
+}
+
+.data-loading {
+  margin: auto auto;
 }

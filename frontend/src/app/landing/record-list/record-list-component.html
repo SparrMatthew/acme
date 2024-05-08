@@ -25,9 +25,15 @@
     multiTemplateDataRows
     class="mat-elevation-z8"
   >
-  <tr class="mat-row" *matNoDataRow>
+  <tr class="mat-row" *matNoDataRow class="no-data-row">
     <td class="mat-cell" [attr.colspan]="displayedColumns.length">
-      No data matching the filter.
+      <mat-progress-spinner
+      class="data-loading"
+      mode="indeterminate"
+      [diameter]="100"
+      [style.color]="'lightblue'"
+    ></mat-progress-spinner>
+      <p style="text-align: center">data loading...</p>
     </td>
   </tr>
     <!-- Existing columns -->
@@ -108,7 +114,7 @@
     <!-- Rows -->
     <tr
       mat-row
-      style="z-index: 100"
+      class="normal-row"
       *matRowDef="let record; columns: displayedColumns"
       (click)="expandRow(record)"
     ></tr>
