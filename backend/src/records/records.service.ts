@@ -53,7 +53,6 @@ export class RecordsService {
   generateMultipleRecords(count: number): Record[] {
     this.mockDatabase = Array.from({ length: count }, () => this.generateRecord());
 
-    debugger
     return this.mockDatabase;
   }
 }

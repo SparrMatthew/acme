@@ -1,10 +1,9 @@
 <mat-progress-spinner
-  *ngIf="!dataSource || dataSource.data.length < 1"
+  *ngIf="!dataSource"
   mode="indeterminate"
   [diameter]="100"
   [style.color]="'lightblue'"
 ></mat-progress-spinner>
-
 <div class="table">
   <mat-form-field appearance="outline" class="filter ">
     <mat-label>Filter</mat-label>
@@ -22,10 +21,15 @@
   <table
     mat-table
     [dataSource]="dataSource"
-    matSort
+    matSort matSortActive="userID" matSortDirection="asc"
     multiTemplateDataRows
     class="mat-elevation-z8"
   >
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+      No data matching the filter.
+    </td>
+  </tr>
     <!-- Existing columns -->
     <ng-container matColumnDef="userID">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>User ID</th>
@@ -65,7 +69,7 @@
     </ng-container>
 
     <ng-container matColumnDef="icons">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
       <td mat-cell *matCellDef="let record">
         <button
           mat-icon-button
@@ -85,13 +89,13 @@
         [attr.colspan]="displayedColumns.length"
       >
         <div
-          class="example-element-detail"
+          class="expand-element-detail"
           [@detailExpand]="
             record === expandedElement ? 'expanded' : 'collapsed'
           "
         >
           <!-- Place your expanded content here -->
-          <div class="example-element-description">
+          <div class="expand-element-description">
             <p>
               Total Annual Salary: {{ totalAnnualSalary(record.salary) |
               currency }}
@@ -119,7 +123,7 @@
     class="mat-elevation-z8"
     [length]="totalRecords"
     [pageSize]="5"
-    [pageSizeOptions]="[5, 10, 25, 100]"
+    [pageSizeOptions]="[5, 10, 25, 100, 50, 10000, 100000, 1000000]"
     showFirstLastButtons
   ></mat-paginator>
   <div class="generate">

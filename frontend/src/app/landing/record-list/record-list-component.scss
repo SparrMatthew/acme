@@ -8,7 +8,7 @@
 
 .table {
   .mat-mdc-table {
-    min-width: 100%;
+    max-width: 80%;
     margin: 1em auto 1em;
     z-index: 15;
   }
@@ -45,13 +45,14 @@
   }
 
   /* Styles for expanded detail */
-  .example-element-description {
+  .expand-element-description {
     background-color: #009688; /* Teal */
     color: #fff;
     font-size: 1em;
     padding: 0.25em;
     margin: 0.25em;
     border-radius: .5em;
+    width: 90%;
   }
 
   /* Paginator styles */

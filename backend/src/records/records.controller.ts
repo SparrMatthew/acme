@@ -45,7 +45,6 @@ export class RecordsController {
     const endTime = performance.now();
     
     // Calculate the elapsed time
-    debugger
     this.recordGenerationTime = endTime - startTime;
     
     // Log the number of records generated and the elapsed time
@@ -55,9 +54,8 @@ export class RecordsController {
   }
 
   @Get('time')
-  getCreationTime(): any {
-    console.log('Record gerneation time')
-    console.log('record generation time' + this.recordGenerationTime);
+  getCreationTime(): number {
+    console.log('record generation time ' + this.recordGenerationTime);
     return this.recordGenerationTime;
   }
 

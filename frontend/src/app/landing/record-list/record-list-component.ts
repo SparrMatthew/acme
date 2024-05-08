@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -20,7 +20,7 @@ import { RecordService } from './record.service';
     ]),
   ]
 })
-export class RecordListComponent implements OnInit, AfterViewInit {
+export class RecordListComponent implements OnInit {
   @ViewChild(MatSort, { static: true })
   sort!: MatSort;
   @ViewChild(MatPaginator, { static: true })
@@ -30,7 +30,7 @@ export class RecordListComponent implements OnInit, AfterViewInit {
   dataSource!: MatTableDataSource<Record, MatPaginator>;
   totalRecords = 0;
   filterValue = '';
-  displayedColumns: string[] = ['userID','name', 'address', 'city', 'state', 'zip', 'phone', 'icons'];
+  displayedColumns: string[] = ['userID', 'name', 'address', 'city', 'state', 'zip', 'phone', 'icons'];
   time?: Date;
 
   constructor(
@@ -39,19 +39,16 @@ export class RecordListComponent implements OnInit, AfterViewInit {
 
   ) { }
 
-  ngAfterViewInit(): void {
-    if (this.dataSource) {
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    }
-  }
 
   ngOnInit() {
     const count = 50;
+    this.sort.active = 'UserID';
+    this.sort.direction = 'asc';
     this.recordService.generateNewRecordSet(count).subscribe((records: Record[]) => {
       this.totalRecords = records.length;
       this.dataSource = new MatTableDataSource<Record>(records);
       this.dataSource.sort = this.sort;
+      
       this.dataSource.paginator = this.paginator;
       this.dataSource.filterPredicate = (data: Record, filter: string) => {
         // Return true if data matches the filter
@@ -97,7 +94,7 @@ export class RecordListComponent implements OnInit, AfterViewInit {
         this.dataSource.filterPredicate = (data: Record, filter: string) => {
           // Implement custom filtering logic
           // Return true if data matches the filter
-  
+
           return data.phone.toLowerCase().includes(filter);
         };
 
