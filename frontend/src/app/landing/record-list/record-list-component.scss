@@ -1,3 +1,5 @@
+$small-screen: 600px;
+
 .filter {
   margin-top: 1em;
 }
@@ -9,8 +11,22 @@
 .table {
   .mat-mdc-table {
     max-width: 80%;
+    min-height: calc(50vh);
     margin: 1em auto 1em;
     z-index: 15;
+  }
+
+  // Define a breakpoint for small screens, e.g., 600px
+  @media (max-width: $small-screen) {
+    // Hide the address, state, and phone columns
+    .mat-mdc-header-cell.address,
+    .mat-mdc-cell.address,
+    .mat-mdc-header-cell.state,
+    .mat-mdc-cell.state,
+    .mat-mdc-header-cell.phone,
+    .mat-mdc-cell.phone {
+      display: none;
+    }
   }
 
   /* Header styles */
@@ -36,7 +52,7 @@
 
   /* Button styles */
   button {
-    background-color: plum;
+    background-color: yellow;
     z-index: 10;
     mat-icon {
       color: darkred;
@@ -45,18 +61,17 @@
 
   /* Hover styles for rows */
   .mat-mdc-row:hover {
-    background-color: #e1bee7; /* Light purple */
+    background-color: yellow;
   }
 
   /* Styles for expanded detail */
   .expand-element-description {
-    background-color: #009688; /* Teal */
-    color: #fff;
+    background-color: turquoise;
+    color: black;
     font-size: 1em;
-    padding: 0.25em;
-    margin: 0.25em;
-    border-radius: .5em;
-    width: 90%;
+    padding: 0.25em 1em;
+    border-radius: 0.5em;
+    width: 30%;
   }
 
   /* Paginator styles */
@@ -95,28 +110,55 @@
   }
 }
 
-.generate {
-  margin: -3em 0 2em 1em;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 25%;
+.performance {
+  margin: 1em 15% 1em;
+  width: 70%;
+  text-align: center;
 
-  .mat-button {
-    color: yellow;
+  .dataset-generation {
+    display: flex;
+    align-content: center;
+    justify-content: space-between;
+    font-size: 1em;
+    background-color: lightblue;
+    border-radius: 0.5em;
+
+    .selector {
+      flex: 10%;
+      align-content: center;
+      font-size: 1em;
+      max-width: 10%;
+    }
+
+    .report {
+      flex: 65%; /* Take up the remaining 65% of the available space */
+      text-align: left;
+       p {
+        color: black;
+        font-size: 0.9em;
+        padding: 0 0 0 3em;  
+      }
+    }
   }
+}
+.no-data-row {
+  margin: 25% 25%;
+  height: 1em;
 }
 
 mat-progress-spinner {
-  margin: 25% auto;
+  margin: 25% 25%;
 }
+
 .mat-progress-spinner circle {
   stroke: lightblue !important;
+  margin: 25% 25%;
 }
+
 .no-data-row {
-display: flex;
-flex-direction: column;
-justify-content: center;  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .data-loading {

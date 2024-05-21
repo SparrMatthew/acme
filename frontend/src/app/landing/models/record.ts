@@ -1,4 +1,6 @@
-import {Company} from './company';
+import { Company } from './company';
+import { Phone } from './phone';
+
 
 export interface Record {
     UID: string;
@@ -11,6 +13,7 @@ export interface Record {
     zip: string;
     areaCode: string;
     phone: string;
+    phoneinformation: Phone;
     salary: Company[];
     totalHouseholdIncome: number;
   }
