@@ -111,7 +111,8 @@ export class RecordListComponent implements OnInit, AfterContentChecked {
       phone.number = matches[0]; // The full matched string is the phone number
       // If there's an extension, you'll need a separate regex to extract it
     } else {
-    
+      console.error('parser fail: '+ phoneNumber);
+      console.log("phne: " + phone);
       phone.number = phoneNumber;
     }
 
