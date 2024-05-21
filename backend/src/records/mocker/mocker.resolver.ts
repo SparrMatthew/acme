@@ -1,27 +1,31 @@
 import { Injectable } from '@nestjs/common';
-import { faker } from '@faker-js/faker/index'
+import { Faker } from '@faker-js/faker';
+
 @Injectable()
-export class RecordsService {
+export class MockerResolver {
+
+  constructor(private faker: Faker) {}
+
   generateCompany(): Company {
     return {
-      companyName: faker.company.name(),
-      annualSalary: faker.datatype.number({ min: 30000, max: 500000 }),
+      companyName: this.faker.company.name(),
+      annualSalary: this.faker.datatype.number({ min: 30000, max: 500000 }),
     };
   }
 
   generateRecord(): Record {
     return {
-      UID: faker.number.int({min: 9, max: 9}).toString(),
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
-      address: faker.location.streetAddress(),
-      city: faker.location.city(),
-      state: faker.location.state(),
-      zip: faker.location.zipCode(),
-      phone: faker.phone.number(),
+      UID: this.faker.number.int({ min: 9, max: 9 }).toString(),
+      firstName: this.faker.person.firstName(),
+      lastName: this.faker.person.lastName(),
+      address: this.faker.location.streetAddress(),
+      city: this.faker.location.city(),
+      state: this.faker.location.state(),
+      zip: this.faker.location.zipCode(),
+      phone: this.faker.phone.number(),
       areaCode: '303',
-      salary: Array.from({ length: faker.number.int({ min: 1, max: 3 }) }, () => this.generateCompany()),
-      totalHouseholdIncome: faker.number.int({ min: 50000, max: 50000000 }),
+      salary: Array.from({ length: this.faker.number.int({ min: 1, max: 3 }) }, () => this.generateCompany()),
+      totalHouseholdIncome: this.faker.number.int({ min: 50000, max: 50000000 }),
     };
   }
 
