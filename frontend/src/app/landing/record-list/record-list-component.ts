@@ -31,7 +31,7 @@ export class RecordListComponent implements OnInit, AfterContentChecked, OnDestr
   totalRecords = 0;
   filterValue = '';
   pageSizeOptions = [7, 25, 100];
-  dataSetSizes = [76, 15000, 100000, 1000000];
+  dataSetSizes = [76, 15000, 100000, 750000];
   resolved = false;
   time?: Date;
   expandedElement?: Record | null;
