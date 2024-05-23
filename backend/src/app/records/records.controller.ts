@@ -17,19 +17,6 @@ export class RecordsController {
     return this.recordService.calculateTotalIncome(UID);
   }
 
-  /** 
-   * 1 record generated in:
-   * recordGenerationTime: 2.746ms
-   * http://localhost:3000/api/records/generate?count=100
-   * 100 records generated in:
-   * recordGenerationTime: 10.269ms
-   * 10000 records generated in:
-   * recordGenerationTime: 290.772ms
-   * http://localhost:3000/api/records/generate?count=1000000
-   * 1000000 records generated in:
-   * recordGenerationTime: 23.970s
-  
-  */
   @Get('generate')
   generateMultipleRecords(@Query('count') count: number): Record[] {
     // Convert count to a number and provide a default if necessary

@@ -16,23 +16,10 @@ $small-screen: 600px;
     z-index: 15;
   }
 
-  // Define a breakpoint for small screens, e.g., 600px
-  @media (max-width: $small-screen) {
-    // Hide the address, state, and phone columns
-    .mat-mdc-header-cell.address,
-    .mat-mdc-cell.address,
-    .mat-mdc-header-cell.state,
-    .mat-mdc-cell.state,
-    .mat-mdc-header-cell.phone,
-    .mat-mdc-cell.phone {
-      display: none;
-    }
-  }
-
   /* Header styles */
   .mat-mdc-header-cell {
     background-color: #673ab7 !important; /* Purple */
-    color: black;
+    color: white;
   }
 
   /* Row styles */
@@ -71,7 +58,9 @@ $small-screen: 600px;
     font-size: 1em;
     padding: 0.25em 1em;
     border-radius: 0.5em;
-    width: 30%;
+    width: 50%;
+    height: 2em;
+    margin: .05em auto;
   }
 
   /* Paginator styles */
@@ -141,13 +130,14 @@ $small-screen: 600px;
     }
   }
 }
+
 .no-data-row {
   margin: 25% 25%;
   height: 1em;
 }
 
 mat-progress-spinner {
-  margin: 25% 25%;
+  margin: 45% 45%;
 }
 
 .mat-progress-spinner circle {

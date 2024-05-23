@@ -1,16 +1,15 @@
 import { Company } from "../entities/company.entity";
+import { Phone, Address } from "../entities/record.entity";
 
 export class CreateRecordDto {
     UID: string;
+    avatar: any;
+    flicker: any;
     name?: string;
     firstName: string;
     lastName: string;
-    address: string;
-    city: string;
-    state: string;
-    zip: string;
-    areaCode: string;
-    phone: string;
+    address: Address;
+    phone: Phone;
     salary: Company[];
     totalHouseholdIncome: number;
 }
