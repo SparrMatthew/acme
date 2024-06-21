@@ -29,7 +29,7 @@ export class RecordsService {
   }
 
   generateCompany(): Company {
-    
+
     return {
       companyName: faker.company.name(),
       annualSalary: faker.number.int({ min: 30000, max: 500000 }),
@@ -50,7 +50,7 @@ export class RecordsService {
       hasExtension,
       extension
     }
-    
+
     return phone;
   }
 
@@ -83,7 +83,8 @@ export class RecordsService {
 
   generateMultipleRecords(count: number): Record[] {
     this.mockDatabase = Array.from({ length: count }, () => this.generateRecord());
-    console.log(this.mockDatabase.length)
+    console.log(this.mockDatabase.length);
+
     return this.mockDatabase;
   }
 }
