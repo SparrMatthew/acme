@@ -15,10 +15,10 @@ export class RecordDetailComponent implements OnInit, OnDestroy {
   salaryDisplayedColumns!: string[];
   salaryArray!: Company[];
   selectedUserId!: string;
-  recordService: any;
+
   userSub: any;
 
-  constructor(recordService: RecordService, private router: Router) {
+  constructor(private recordService: RecordService, private router: Router) {
     this.selectedUserId = recordService.getSelectedUID();
     if (this.selectedUserId === "0000000") {
       this.router.navigate(['/records']);
@@ -26,7 +26,25 @@ export class RecordDetailComponent implements OnInit, OnDestroy {
 
     this.userSub = this.recordService.getRecordByUID(this.selectedUserId).subscribe((user: Record) => {
       this.user = user;
-      this.user.address
+      /**
+       *  UID: "714270642"
+          address:  {city: 'El Paso', state: 'Illinois', street: '496 Blanda  Brooks', zipcode: '99313'}; 
+          avatar: "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/93.jpg"
+          firstName: "Brigitte"
+          flicker: "https://loremflickr.com/640/480?lock=1424346534903808"
+          lastName: "Rutherford"
+          phone: {number: '028-385-4769', areaCode: '028', hasExtension: true, extension: '8849'}
+          salary: 
+            (4) [{…}, {…}, {…}, {…}]
+          totalHouseholdIncome: 31000537
+       */
+      this.user.address.street = user.address.street;
+      this.user.address.city = user.address.city;
+      this.user.address.state = user.address.state;
+      this.user.address.zip = user.address.zip;
+
+      this.user.phone.areacode = user.phone.areacode;
+      this.user.phone.phone = user.phone.number;
     });
   }
 

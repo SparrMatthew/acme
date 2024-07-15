@@ -5,18 +5,15 @@
     <mat-card class="address-card">
         <mat-card-header>
           <p><strong>Name:</strong> {{ user.firstName }} {{ user.lastName }}</p>
-          <!-- <img  width="4em" [src]="user.flicker" />
-          <img  width="4em" [src]="user.avatar" /> -->
-            br />
+          
           <mat-card-title>User Address</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-
-          <p><strong>Address:</strong> {{ user.address }}</p>
-          <p><strong>City:</strong> {{ user.city }}</p>
-          <p><strong>State:</strong> {{ user.state }}</p>
-          <p><strong>Zipcode:</strong> {{ user.zip }}</p>
-          <p><strong>Telephone:</strong> ({{ user.areaCode }}) {{ user.phone }}</p>
+          <p><strong>Address:</strong> {{ user.address.street }}</p>
+          <p><strong>City:</strong> {{ user.address.city }}</p>
+          <p><strong>State:</strong> {{ user.address.state }}</p>
+          <p><strong>Zipcode:</strong> {{ user.address.zip }}</p>
+          <p><strong>Telephone:</strong> ({{ user.phone.areacode }}) {{ user.phone.number }}</p>
         </mat-card-content>
       </mat-card>
   </div>
