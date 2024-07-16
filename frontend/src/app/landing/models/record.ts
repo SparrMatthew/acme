@@ -13,14 +13,14 @@ export interface Record {
       street: string;
       city: string;
       state: string;
-      zip: string;
+      zipcode: string;
     };
     city: string;
     state: string;
     zip: string;
     areaCode: string;
     phone: {
-      areacode: string;
+      areaCode: string;
       phone: string;
       number: string;
     };

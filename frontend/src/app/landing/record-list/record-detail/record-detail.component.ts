@@ -3,6 +3,7 @@ import { Company } from '../../models/company';
 import { Record } from '../../models/record';
 import { RecordService } from '../record.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-record-detail',
@@ -16,7 +17,7 @@ export class RecordDetailComponent implements OnInit, OnDestroy {
   salaryArray!: Company[];
   selectedUserId!: string;
 
-  userSub: any;
+  userSub: Subscription;
 
   constructor(private recordService: RecordService, private router: Router) {
     this.selectedUserId = recordService.getSelectedUID();
@@ -41,10 +42,10 @@ export class RecordDetailComponent implements OnInit, OnDestroy {
       this.user.address.street = user.address.street;
       this.user.address.city = user.address.city;
       this.user.address.state = user.address.state;
-      this.user.address.zip = user.address.zip;
+      this.user.address.zipcode = user.address.zipcode;
 
-      this.user.phone.areacode = user.phone.areacode;
-      this.user.phone.phone = user.phone.number;
+      this.user.phone.areaCode = user.phone.areaCode;
+      this.user.phone.phone = user.phone.number.substring(4, 7) + '-' + user.phone.number.substring(8, 12);
     });
   }
 
